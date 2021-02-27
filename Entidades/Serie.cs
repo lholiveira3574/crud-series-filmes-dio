@@ -9,7 +9,7 @@ namespace crud_series_filmes_dio.Entidades
 		public string Titulo { get; private set; }
 		public string Descricao { get; private set; }
 		public int Ano { get; private set; }
-        //private int Temporada { get; set; }
+    
         public bool Excluido {get; private set;}
 
         public Serie(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)

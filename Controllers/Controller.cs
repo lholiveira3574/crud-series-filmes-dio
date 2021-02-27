@@ -1,13 +1,17 @@
 using System.Collections.Generic;
-using crud_series_filmes_dio.Entidades;
 using crud_series_filmes_dio.Enums;
-using crud_series_filmes_dio.Repositorios;
+using crud_series_filmes_dio.Interfaces;
 
 namespace crud_series_filmes_dio.Controllers
 {
-    public class SerieController 
+    public class Controller<T>
     {
-        SerieRepositorio serieRepositorio = new SerieRepositorio();
+        IService<T> _service;
+
+        public Controller(IService<T> service)
+        {
+            _service = service;    
+        }
         public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
         {
             throw new System.NotImplementedException();
@@ -20,22 +24,22 @@ namespace crud_series_filmes_dio.Controllers
 
         public void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
         {
-            serieRepositorio.Inserir(id, genero, titulo, descricao, ano, excluido);
+            _service.Inserir(id, genero, titulo, descricao, ano, excluido);
         }
 
-        public List<Serie> Listar()
+        public List<T> Listar()
         {
-            return serieRepositorio.Listar();
+            return _service.Listar();
         }
 
-        public Serie Retornar(int id)
+        public T Retornar(int id)
         {
-            return serieRepositorio.Retornar(id);
+            return _service.Retornar(id);
         }
 
         public int ValorId()
         {
-            return serieRepositorio.ValorId();
+            return _service.ValorId();
         }
     }
 }

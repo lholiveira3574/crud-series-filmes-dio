@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using crud_series_filmes_dio.Entidades;
 using crud_series_filmes_dio.Interfaces;
-using System.IO;
 using crud_series_filmes_dio.Enums;
+using crud_series_filmes_dio.Repositorios;
 
-namespace crud_series_filmes_dio.Repositorios
+namespace crud_series_filmes_dio.Service
 {
-    public class FilmeRepositorio : IRepositorio<Filme>
+    public class FilmeService : IService<Filme>
     {
-        public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
+        FilmeRepositorio filmeRepositorio = new FilmeRepositorio();
+         public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
         {
             throw new System.NotImplementedException();
         }

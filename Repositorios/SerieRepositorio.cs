@@ -11,7 +11,7 @@ namespace crud_series_filmes_dio.Repositorios
     {
         const string diretorioArquivo = @"C:\dbtemp\series.txt";
         private List<Serie> listaSerie = new List<Serie>();
-        public void Atualizar(int id, Serie obj)
+        public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
         {
             throw new System.NotImplementedException();
         }
@@ -21,21 +21,59 @@ namespace crud_series_filmes_dio.Repositorios
             throw new System.NotImplementedException();
         }
 
-        public void Inserir(Serie obj)
+        public void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
         {
+
+            Serie novaSerie = new Serie(id, genero, titulo, descricao, ano, excluido);
             
             using (StreamWriter sw = File.AppendText(diretorioArquivo)) 
             {
-                sw.WriteLine(obj.Id + "," + obj.Genero + "," + obj.Titulo + "," + obj.Descricao + "," + obj.Ano + "," + obj.Excluido);
+                sw.WriteLine(novaSerie.Id + "," + 
+                             novaSerie.Genero + "," + 
+                             novaSerie.Titulo + "," + 
+                             novaSerie.Descricao + "," + 
+                             novaSerie.Ano + "," + 
+                             novaSerie.Excluido);
             }
 
         }
 
         public List<Serie> Listar()
         {
+            return retornarTodosRegistros();;
+        }
+
+        public Serie Retornar(int id)
+        {
+            List<Serie> series = retornarTodosRegistros();
+
+            for (int i = 0; i < series.Count; i++)
+            {
+                if (series[i].Id == id)
+                {
+                    return new Serie(series[i].Id, 
+                                     series[i].Genero, 
+                                     series[i].Titulo,
+                                     series[i].Descricao, 
+                                     series[i].Ano, 
+                                     series[i].Excluido);
+                }   
+            }
+
+            return null;
+        }
+
+        public int ValorId()
+        {
+             string[] linhas = File.ReadAllLines(diretorioArquivo);
+             return linhas.Length;
+        }
+
+        private List<Serie> retornarTodosRegistros ()
+        {
             string[] linhas = File.ReadAllLines(diretorioArquivo);
 
-            List<Serie> listaSerie = new List<Serie>();
+            List<Serie> seriesCadastradas = new List<Serie>();
 
             foreach (string linha in linhas) 
             {
@@ -47,23 +85,10 @@ namespace crud_series_filmes_dio.Repositorios
                 int ano = int.Parse(campos[4]);
                 bool excluido = bool.Parse(campos[5]);
 
-                Serie serie = new Serie(id, genero, titulo, descricao, ano, excluido);
+                seriesCadastradas.Add(new Serie(id, genero, titulo, descricao, ano, excluido));
+            }   
 
-                listaSerie.Add(serie);
-            }
-
-            return listaSerie;
-        }
-
-        public Serie Retornar(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int ValorId()
-        {
-             string[] linhas = File.ReadAllLines(diretorioArquivo);
-             return linhas.Length;
+            return seriesCadastradas; 
         }
     }
 }

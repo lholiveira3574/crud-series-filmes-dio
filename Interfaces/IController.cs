@@ -3,7 +3,7 @@ using crud_series_filmes_dio.Enums;
 
 namespace crud_series_filmes_dio.Interfaces
 {
-    public interface IRepositorio<T>
+    public interface IController<T>
     {
         List<T> Listar();
         T Retornar(int id);        
