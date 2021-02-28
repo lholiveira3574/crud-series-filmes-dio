@@ -5,20 +5,20 @@ namespace crud_series_filmes_dio.Entidades
     public class Filme
     {
         public int Id {get; private set;} 
-        private Genero Genero { get; set; }
-		private string Titulo { get; set; }
-		private string Descricao { get; set; }
-		private int Ano { get; set; }
-        private bool Excluido {get; set;} 
+        public Genero Genero { get; private set; }
+		public string Titulo { get; private set; }
+		public string Descricao { get; private set; }
+		public int Ano { get; private set; }
+        public bool Excluido {get; private set;} 
 
-        public Filme(int id, Genero genero, string titulo, string descricao, int ano)
+        public Filme(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
         {
             this.Id = id;
 			this.Genero = genero;
 			this.Titulo = titulo;
 			this.Descricao = descricao;
 			this.Ano = ano;
-            this.Excluido = false;    
+            this.Excluido = excluido;    
         }
 
         public string retornaTitulo()
@@ -37,7 +37,7 @@ namespace crud_series_filmes_dio.Entidades
 
         public override string ToString()
 		{
-            return  "Numero da Conta: " + this.Id + " | " +
+            return  "Id do Filme: " + this.Id + " | " +
                     "Genero: " + this.Genero + " | " +
                     "Titulo: " + this.Titulo + " | "+
                     "Ano de Início: " + this.Ano + " | " +

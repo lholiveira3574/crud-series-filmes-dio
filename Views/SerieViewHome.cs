@@ -45,6 +45,7 @@ namespace crud_series_filmes_dio.Views
                 opcaoUsuario = ObterOpcaoUsuario();
             }
         }
+        
         private string ObterOpcaoUsuario()
 		{
             Console.WriteLine();
@@ -71,7 +72,10 @@ namespace crud_series_filmes_dio.Views
 
 			var serieEncontrada = serieController.Retornar(id);
 
-			Console.WriteLine(serieEncontrada);
+            if (serieEncontrada == null)
+                Console.WriteLine("Série de Id {0} não foi encontrada!", id);
+            else
+			    Console.WriteLine(serieEncontrada);
         }
 
         private void Excluir()
@@ -115,11 +119,17 @@ namespace crud_series_filmes_dio.Views
         {
             var seriesCadastradas = serieController.Listar();
 
-            foreach(var series in seriesCadastradas)
-			{
-				Console.WriteLine(series);
-			}
-
+            if (seriesCadastradas.Count <= 0)
+            {
+                Console.WriteLine("Nenhum registro cadastrado!");
+            }
+            else
+            {
+                foreach(var series in seriesCadastradas)
+                {
+                    Console.WriteLine(series);
+                }
+            }
         }
     }
 }

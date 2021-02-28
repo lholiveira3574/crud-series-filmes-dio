@@ -10,7 +10,6 @@ namespace crud_series_filmes_dio.Repositorios
     public class SerieRepositorio : IRepositorio<Serie>
     {
         const string diretorioArquivo = @"C:\dbtemp\series.txt";
-        private List<Serie> listaSerie = new List<Serie>();
         public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
         {
             throw new System.NotImplementedException();

@@ -9,7 +9,6 @@ namespace crud_series_filmes_dio.Entidades
 		public string Titulo { get; private set; }
 		public string Descricao { get; private set; }
 		public int Ano { get; private set; }
-    
         public bool Excluido {get; private set;}
 
         public Serie(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
@@ -38,7 +37,7 @@ namespace crud_series_filmes_dio.Entidades
 
         public override string ToString()
 		{
-            return  "Numero da Conta: " + this.Id + " | " +
+            return  "Id da Série: " + this.Id + " | " +
                     "Genero: " + this.Genero + " | " +
                     "Titulo: " + this.Titulo + " | "+
                     "Ano de Início: " + this.Ano + " | " +

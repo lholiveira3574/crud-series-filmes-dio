@@ -21,22 +21,22 @@ namespace crud_series_filmes_dio.Service
 
         public void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
         {
-            throw new System.NotImplementedException();
+            filmeRepositorio.Inserir(id, genero, titulo, descricao, ano, excluido);
         }
 
         public List<Filme> Listar()
         {
-            throw new System.NotImplementedException();
+            return filmeRepositorio.Listar();
         }
 
         public Filme Retornar(int id)
         {
-            throw new System.NotImplementedException();
+             return filmeRepositorio.Retornar(id);
         }
 
         public int ValorId()
         {
-            throw new System.NotImplementedException();
+            return filmeRepositorio.ValorId();
         }
     }
 }
