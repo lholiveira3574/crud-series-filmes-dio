@@ -21,7 +21,8 @@ namespace crud_series_filmes_dio.Service
 
         public void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
         {
-            filmeRepositorio.Inserir(id, genero, titulo, descricao, ano, excluido);
+            Filme novoFilme = new Filme(id, genero, titulo, descricao, ano, excluido);
+            filmeRepositorio.Inserir(novoFilme);
         }
 
         public List<Filme> Listar()

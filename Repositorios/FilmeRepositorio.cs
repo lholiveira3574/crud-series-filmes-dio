@@ -12,7 +12,7 @@ namespace crud_series_filmes_dio.Repositorios
     {
         const string diretorioArquivo = @"C:\dbtemp\filmes.txt";
   
-        public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
+        public void Atualizar(int id, Filme filme)
         {
             throw new System.NotImplementedException();
         }
@@ -22,11 +22,8 @@ namespace crud_series_filmes_dio.Repositorios
             throw new System.NotImplementedException();
         }
 
-        public void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
+        public void Inserir(Filme novoFilme)
         {
-
-            Filme novoFilme = new Filme(id, genero, titulo, descricao, ano, excluido);
-            
             using (StreamWriter sw = File.AppendText(diretorioArquivo)) 
             {
                 sw.WriteLine(novoFilme.Id + "," + 
@@ -36,7 +33,6 @@ namespace crud_series_filmes_dio.Repositorios
                              novoFilme.Ano + "," + 
                              novoFilme.Excluido);
             }
-
         }
 
         public List<Filme> Listar()

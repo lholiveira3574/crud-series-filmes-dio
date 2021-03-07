@@ -7,9 +7,9 @@ namespace crud_series_filmes_dio.Interfaces
     {
         List<T> Listar();
         T Retornar(int id);        
-        void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido);        
+        void Inserir(T entidade);        
         void Excluir(int id);        
-        void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido);
+        void Atualizar(int id, T entidade);
         int ValorId();
     }
 }

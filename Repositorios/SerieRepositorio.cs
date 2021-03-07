@@ -10,7 +10,7 @@ namespace crud_series_filmes_dio.Repositorios
     public class SerieRepositorio : IRepositorio<Serie>
     {
         const string diretorioArquivo = @"C:\dbtemp\series.txt";
-        public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
+        public void Atualizar(int id, Serie serie)
         {
             throw new System.NotImplementedException();
         }
@@ -20,11 +20,8 @@ namespace crud_series_filmes_dio.Repositorios
             throw new System.NotImplementedException();
         }
 
-        public void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
-        {
-
-            Serie novaSerie = new Serie(id, genero, titulo, descricao, ano, excluido);
-            
+        public void Inserir(Serie novaSerie)
+        { 
             using (StreamWriter sw = File.AppendText(diretorioArquivo)) 
             {
                 sw.WriteLine(novaSerie.Id + "," + 
@@ -34,7 +31,6 @@ namespace crud_series_filmes_dio.Repositorios
                              novaSerie.Ano + "," + 
                              novaSerie.Excluido);
             }
-
         }
 
         public List<Serie> Listar()
