@@ -9,14 +9,15 @@ namespace crud_series_filmes_dio.Service
     public class FilmeService : IService<Filme>
     {
         FilmeRepositorio filmeRepositorio = new FilmeRepositorio();
-         public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
+         public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano)
         {
-            throw new System.NotImplementedException();
+            Filme filmeAtualizado = new Filme(id, genero, titulo, descricao, ano, false);
+            filmeRepositorio.Atualizar(filmeAtualizado);
         }
 
         public void Excluir(int id)
         {
-            throw new System.NotImplementedException();
+            filmeRepositorio.Excluir(id);
         }
 
         public void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)

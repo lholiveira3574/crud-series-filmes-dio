@@ -72,20 +72,60 @@ namespace crud_series_filmes_dio.Views
 
 			var serieEncontrada = serieController.Retornar(id);
 
-            if (serieEncontrada == null)
-                Console.WriteLine("Série de Id {0} não foi encontrada!", id);
+            if (serieEncontrada != null)
+                Console.WriteLine(serieEncontrada);    
             else
-			    Console.WriteLine(serieEncontrada);
+                Console.WriteLine(MensagemSerieEncontrada(id));  
         }
 
         private void Excluir()
         {
-            throw new NotImplementedException();
+            Console.Write("Digite o id da série: ");
+			int id = int.Parse(Console.ReadLine());
+
+            if (serieExiste(id))
+            {
+                serieController.Excluir(id);
+                Console.WriteLine("Série de id {0} foi excluida com sucesso!", id);
+            }
+            else
+            {
+                Console.WriteLine(MensagemSerieEncontrada(id));
+            }
         }
 
         private void Atualizar()
         {
-            throw new NotImplementedException();
+            
+			Console.Write("Digite o id da série: ");
+			int id = int.Parse(Console.ReadLine());
+
+            if (serieExiste(id))
+            {
+                foreach (int i in Enum.GetValues(typeof(Genero)))
+                {
+                    Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Genero), i));
+                }
+                Console.Write("Digite o gênero entre as opções acima: ");
+                int genero = int.Parse(Console.ReadLine());
+
+                Console.Write("Digite o Título da Série: ");
+                string titulo = Console.ReadLine();
+
+                Console.Write("Digite o Ano de Início da Série: ");
+                int ano = int.Parse(Console.ReadLine());
+
+                Console.Write("Digite a Descrição da Série: ");
+                string descricao = Console.ReadLine();
+
+                serieController.Atualizar(id, (Genero)genero, titulo, descricao, ano);
+
+                Console.WriteLine("Série de id {0} foi atualizada com sucesso!", id);
+            }
+            else
+            {
+                Console.WriteLine(MensagemSerieEncontrada(id));
+            }
         }
 
         private void Inserir()
@@ -121,7 +161,7 @@ namespace crud_series_filmes_dio.Views
 
             if (seriesCadastradas.Count <= 0)
             {
-                Console.WriteLine("Nenhum registro cadastrado!");
+                Console.WriteLine("Nenhuma série está cadastrada!");
             }
             else
             {
@@ -130,6 +170,26 @@ namespace crud_series_filmes_dio.Views
                     Console.WriteLine(series);
                 }
             }
+        }
+
+        private bool serieExiste(int id)
+        {
+            var seriesCadastradas = serieController.Listar();
+
+            for (int i = 0; i < seriesCadastradas.Count; i++)
+            {
+                if(seriesCadastradas[i].Id == id)
+                {
+                    return true;
+                }  
+            }
+
+            return false;
+        }
+
+        private string MensagemSerieEncontrada(int id)
+        {
+            return "Série de id " + id + " não foi encontrada!";
         }
     }
 }

@@ -72,20 +72,61 @@ namespace crud_series_filmes_dio.Views
 
 			var filmeEncontrado = filmeController.Retornar(id);
 
-            if (filmeEncontrado == null)
-                Console.WriteLine("Filme de Id {0} não foi encontrado!", id);
+            if (filmeEncontrado != null)
+                Console.WriteLine(filmeEncontrado);    
             else
-			    Console.WriteLine(filmeEncontrado);
+                Console.WriteLine(MensagemFilmeNaoEncontrado(id)); 
         }
 
         private void Excluir()
         {
-            throw new NotImplementedException();
+            Console.Write("Digite o id do filme: ");
+			int id = int.Parse(Console.ReadLine());
+
+            if (FilmeExiste(id))
+            {
+                filmeController.Excluir(id);
+                Console.WriteLine("Filme de id {0} foi excluido com sucesso!", id);
+            }
+            else
+            {
+                Console.WriteLine(MensagemFilmeNaoEncontrado(id));
+            }
+			
         }
 
         private void Atualizar()
         {
-            throw new NotImplementedException();
+            Console.Write("Digite o id do Filme: ");
+			int id = int.Parse(Console.ReadLine());
+
+            if (FilmeExiste(id))
+            {
+
+                foreach (int i in Enum.GetValues(typeof(Genero)))
+                {
+                    Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Genero), i));
+                }
+                Console.Write("Digite o gênero entre as opções acima: ");
+                int genero = int.Parse(Console.ReadLine());
+
+                Console.Write("Digite o Título do Filme: ");
+                string titulo = Console.ReadLine();
+
+                Console.Write("Digite o Ano de Início do Filme: ");
+                int ano = int.Parse(Console.ReadLine());
+
+                Console.Write("Digite a Descrição do Filme: ");
+                string descricao = Console.ReadLine();
+
+                filmeController.Atualizar(id, (Genero)genero, titulo, descricao, ano);
+
+                Console.WriteLine("Filme de id {0} foi atualizado com sucesso!", id);
+            }
+            else
+            {
+                Console.WriteLine(MensagemFilmeNaoEncontrado(id));    
+            }
         }
 
         private void Inserir()
@@ -121,7 +162,7 @@ namespace crud_series_filmes_dio.Views
 
             if (filmesCadastrados.Count <= 0)
             {
-                Console.WriteLine("Nenhum registro cadastrado!");
+                Console.WriteLine("Nenhum filme está cadastrado!");
             }
             else
             {
@@ -130,6 +171,26 @@ namespace crud_series_filmes_dio.Views
                     Console.WriteLine(filmes);
                 }
             }
+        }
+
+        private bool FilmeExiste(int id)
+        {
+            var filmesCadastradas = filmeController.Listar();
+
+            for (int i = 0; i < filmesCadastradas.Count; i++)
+            {
+                if(filmesCadastradas[i].Id == id)
+                {
+                    return true;
+                }  
+            }
+
+            return false;
+        }
+
+        private string MensagemFilmeNaoEncontrado(int id)
+        {
+            return "Filme de id " + id + " não foi encontrado!";
         }
     }
 }

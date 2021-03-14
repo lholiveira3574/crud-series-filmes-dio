@@ -12,14 +12,58 @@ namespace crud_series_filmes_dio.Repositorios
     {
         const string diretorioArquivo = @"C:\dbtemp\filmes.txt";
   
-        public void Atualizar(int id, Filme filme)
+        public void Atualizar(Filme filme)
         {
-            throw new System.NotImplementedException();
+            string[] Registros = File.ReadAllLines(diretorioArquivo);
+
+            for (int i = 0; i < Registros.Length; i++)
+            {
+                string[] campos = Registros[i].Split(',');
+
+                int idRegistro = int.Parse(campos[0]);
+
+                if (idRegistro == filme.Id) 
+                {
+                    Registros[i] =  filme.Id + "," + 
+                                    filme.Genero + "," + 
+                                    filme.Titulo + "," + 
+                                    filme.Descricao + "," + 
+                                    filme.Ano + "," + 
+                                    filme.Excluido;
+
+                    File.WriteAllLines(diretorioArquivo, Registros);
+                }
+            }   
         }
 
         public void Excluir(int id)
         {
-            throw new System.NotImplementedException();
+            string[] Registros = File.ReadAllLines(diretorioArquivo);
+
+            for (int i = 0; i < Registros.Length; i++)
+            {
+                string[] campos = Registros[i].Split(',');
+
+                int idRegistro = int.Parse(campos[0]);
+
+                if (idRegistro == id) 
+                {
+                    Genero genero = (Genero)Enum.Parse(typeof(Genero), campos[1]);
+                    string titulo = campos[2];
+                    string descricao = campos[3];
+                    int ano = int.Parse(campos[4]);
+                    bool excluido = true;
+                    
+                    Registros[i] = idRegistro + "," + 
+                                genero + "," + 
+                                titulo + "," + 
+                                descricao + "," + 
+                                ano + "," + 
+                                excluido;
+
+                    File.WriteAllLines(diretorioArquivo, Registros);
+                }
+            }   
         }
 
         public void Inserir(Filme novoFilme)

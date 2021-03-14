@@ -9,7 +9,7 @@ namespace crud_series_filmes_dio.Interfaces
         T Retornar(int id);        
         void Inserir(T entidade);        
         void Excluir(int id);        
-        void Atualizar(int id, T entidade);
+        void Atualizar(T entidade);
         int ValorId();
     }
 }

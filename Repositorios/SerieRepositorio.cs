@@ -10,14 +10,58 @@ namespace crud_series_filmes_dio.Repositorios
     public class SerieRepositorio : IRepositorio<Serie>
     {
         const string diretorioArquivo = @"C:\dbtemp\series.txt";
-        public void Atualizar(int id, Serie serie)
+        public void Atualizar(Serie serie)
         {
-            throw new System.NotImplementedException();
+            string[] Registros = File.ReadAllLines(diretorioArquivo);
+
+            for (int i = 0; i < Registros.Length; i++)
+            {
+                string[] campos = Registros[i].Split(',');
+
+                int idRegistro = int.Parse(campos[0]);
+
+                if (idRegistro == serie.Id) 
+                {
+                    Registros[i] =  serie.Id + "," + 
+                                    serie.Genero + "," + 
+                                    serie.Titulo + "," + 
+                                    serie.Descricao + "," + 
+                                    serie.Ano + "," + 
+                                    serie.Excluido;
+
+                    File.WriteAllLines(diretorioArquivo, Registros);
+                }
+            }   
         }
 
         public void Excluir(int id)
         {
-            throw new System.NotImplementedException();
+            string[] Registros = File.ReadAllLines(diretorioArquivo);
+
+            for (int i = 0; i < Registros.Length; i++)
+            {
+                string[] campos = Registros[i].Split(',');
+
+                int idRegistro = int.Parse(campos[0]);
+
+                if (idRegistro == id) 
+                {
+                    Genero genero = (Genero)Enum.Parse(typeof(Genero), campos[1]);
+                    string titulo = campos[2];
+                    string descricao = campos[3];
+                    int ano = int.Parse(campos[4]);
+                    bool excluido = true;
+                    
+                    Registros[i] = idRegistro + "," + 
+                                   genero + "," + 
+                                   titulo + "," + 
+                                   descricao + "," + 
+                                   ano + "," + 
+                                   excluido;
+
+                    File.WriteAllLines(diretorioArquivo, Registros);
+                }
+            }   
         }
 
         public void Inserir(Serie novaSerie)
@@ -40,7 +84,7 @@ namespace crud_series_filmes_dio.Repositorios
 
         public Serie Retornar(int id)
         {
-            List<Serie> series = retornarTodosRegistros();
+            var series = retornarTodosRegistros();
 
             for (int i = 0; i < series.Count; i++)
             {

@@ -9,7 +9,7 @@ namespace crud_series_filmes_dio.Interfaces
         T Retornar(int id);        
         void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido);        
         void Excluir(int id);        
-        void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido);
+        void Atualizar(int id, Genero genero, string titulo, string descricao, int ano);
         int ValorId();
     }
 }

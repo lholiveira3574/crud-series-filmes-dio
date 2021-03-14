@@ -12,14 +12,14 @@ namespace crud_series_filmes_dio.Controllers
         {
             _service = service;    
         }
-        public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
+        public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano)
         {
-            throw new System.NotImplementedException();
+            _service.Atualizar(id, genero, titulo, descricao, ano);
         }
 
         public void Excluir(int id)
         {
-            throw new System.NotImplementedException();
+            _service.Excluir(id);
         }
 
         public void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)

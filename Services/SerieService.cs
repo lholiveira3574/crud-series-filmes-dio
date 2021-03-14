@@ -12,14 +12,15 @@ namespace crud_series_filmes_dio.Service
     {
         SerieRepositorio serieRepositorio = new SerieRepositorio();
         
-        public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
+        public void Atualizar(int id, Genero genero, string titulo, string descricao, int ano)
         {
-            throw new System.NotImplementedException();
+            Serie serieAtualizada = new Serie(id, genero, titulo, descricao, ano, false);
+            serieRepositorio.Atualizar(serieAtualizada);
         }
 
         public void Excluir(int id)
         {
-            throw new System.NotImplementedException();
+            serieRepositorio.Excluir(id);
         }
 
         public void Inserir(int id, Genero genero, string titulo, string descricao, int ano, bool excluido)
