@@ -9,10 +9,10 @@ namespace crud_series_filmes_dio.Repositorios
 {
     public class SerieRepositorio : IRepositorio<Serie>
     {
-        const string diretorioArquivo = @"C:\dbtemp\series.txt";
+        Repositorio repositorio = new Repositorio("series.txt");
         public void Atualizar(Serie serie)
         {
-            string[] Registros = File.ReadAllLines(diretorioArquivo);
+            string[] Registros = repositorio.RetornaRegistros();
 
             for (int i = 0; i < Registros.Length; i++)
             {
@@ -29,14 +29,14 @@ namespace crud_series_filmes_dio.Repositorios
                                     serie.Ano + "," + 
                                     serie.Excluido;
 
-                    File.WriteAllLines(diretorioArquivo, Registros);
+                    File.WriteAllLines(repositorio.Diretorio, Registros);
                 }
             }   
         }
 
         public void Excluir(int id)
         {
-            string[] Registros = File.ReadAllLines(diretorioArquivo);
+            string[] Registros = repositorio.RetornaRegistros();
 
             for (int i = 0; i < Registros.Length; i++)
             {
@@ -59,14 +59,14 @@ namespace crud_series_filmes_dio.Repositorios
                                    ano + "," + 
                                    excluido;
 
-                    File.WriteAllLines(diretorioArquivo, Registros);
+                    File.WriteAllLines(repositorio.Diretorio, Registros);
                 }
             }   
         }
 
         public void Inserir(Serie novaSerie)
         { 
-            using (StreamWriter sw = File.AppendText(diretorioArquivo)) 
+            using (StreamWriter sw = File.AppendText(repositorio.Diretorio)) 
             {
                 sw.WriteLine(novaSerie.Id + "," + 
                              novaSerie.Genero + "," + 
@@ -104,13 +104,13 @@ namespace crud_series_filmes_dio.Repositorios
 
         public int ValorId()
         {
-             string[] linhas = File.ReadAllLines(diretorioArquivo);
+             string[] linhas = repositorio.RetornaRegistros();
              return linhas.Length;
         }
 
         private List<Serie> retornarTodosRegistros ()
         {
-            string[] linhas = File.ReadAllLines(diretorioArquivo);
+            string[] linhas = repositorio.RetornaRegistros();
 
             List<Serie> seriesCadastradas = new List<Serie>();
 
