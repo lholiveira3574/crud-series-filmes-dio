@@ -6,7 +6,7 @@ namespace crud_series_filmes_dio.Controllers
 {
     public class Controller<T>
     {
-        IService<T> _service;
+        private readonly IService<T> _service;
 
         public Controller(IService<T> service)
         {
