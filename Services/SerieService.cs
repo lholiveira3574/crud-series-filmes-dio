@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using crud_series_filmes_dio.Entidades;
 using crud_series_filmes_dio.Interfaces;
-using System.IO;
 using crud_series_filmes_dio.Enums;
 using crud_series_filmes_dio.Repositorios;
 

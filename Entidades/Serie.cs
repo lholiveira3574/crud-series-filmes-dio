@@ -21,20 +21,6 @@ namespace crud_series_filmes_dio.Entidades
             this.Excluido = excluido;    
         }
 
-        public string retornaTitulo()
-        {
-			return this.Titulo;
-		}
-
-        public bool retornaExcluido()
-		{
-			return this.Excluido;
-		}
-
-        public void Excluir() {
-            this.Excluido = true;
-        }
-
         public override string ToString()
 		{
             return  "Id da Série: " + this.Id + " | " +

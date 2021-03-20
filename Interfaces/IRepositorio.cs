@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using crud_series_filmes_dio.Enums;
 
 namespace crud_series_filmes_dio.Interfaces
 {
